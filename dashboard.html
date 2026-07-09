@@ -181,22 +181,22 @@
   .topnav-right{
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:14px;
   }
 
   .welcome-msg{
-    font-size:13px;
-    font-weight:600;
+    font-size:16px;
+    font-weight:700;
     color:var(--gray-700);
     display:flex;
     align-items:center;
-    gap:6px;
-    max-width:220px;
+    gap:8px;
+    max-width:260px;
     overflow:hidden;
     white-space:nowrap;
     flex-shrink:1;
   }
-  .welcome-msg .name{color:var(--ink); overflow:hidden; text-overflow:ellipsis;}
+  .welcome-msg .wave{font-size:18px; line-height:1;}
 
   /* Language switcher */
   .lang-switcher{
@@ -206,25 +206,18 @@
     display:flex;
     align-items:center;
     gap:6px;
-    padding:6px 10px;
-    border:1px solid var(--gray-300);
-    border-radius:999px;
-    font-size:12px;
+    padding:4px;
+    font-size:18px;
     font-weight:600;
     color:var(--gray-700);
-    background:var(--white);
-    transition: all .2s var(--ease);
+    transition: transform .2s var(--ease), opacity .2s var(--ease);
   }
   .lang-btn:hover{
-    border-color:var(--sky);
-    color:var(--sky-dark);
-    box-shadow: 0 2px 12px rgba(41,82,227,0.18);
+    transform: scale(1.1);
+    opacity:0.8;
   }
-  .lang-btn .chev{
-    font-size:10px;
-    transition: transform .25s var(--ease);
-    color:var(--gray-500);
-  }
+  .lang-btn .lang-text,
+  .lang-btn .chev{display:none;}
   .lang-switcher.open .chev{transform:rotate(180deg);}
 
   .lang-menu{
@@ -896,20 +889,23 @@
   .back-btn{
     display:inline-flex;
     align-items:center;
-    gap:6px;
-    font-size:11.5px;
+    gap:5px;
+    font-size:13px;
     font-weight:700;
-    color:var(--sky-dark);
-    background: rgba(41,82,227,0.08);
+    letter-spacing:-0.01em;
+    color:var(--gray-500);
+    background:none;
     border:none;
-    border-radius:999px;
-    padding:7px 14px 7px 10px;
+    padding:4px 2px;
     cursor:pointer;
-    margin-bottom:14px;
-    transition: background .2s var(--ease);
+    margin-bottom:16px;
+    transition: color .2s var(--ease), gap .2s var(--ease);
   }
-  .back-btn svg{width:16px; height:16px;}
-  .back-btn:hover{background: rgba(41,82,227,0.14);}
+  .back-btn svg{width:15px; height:15px; transition: transform .2s var(--ease);}
+  .back-btn:hover{color:var(--ink); gap:8px;}
+  .back-btn:hover svg{transform:translateX(-2px);}
+  .back-btn:active svg{transform:translateX(-4px);}
+  .back-btn:focus-visible{outline:2px solid var(--sky); outline-offset:4px; border-radius:6px;}
 
   /* ====== PAPER ROW CARD ====== */
   .pq-card{
@@ -1732,7 +1728,7 @@
     .sidebar.open{transform: translateX(0);}
     .main{margin-left:0; padding:24px 18px 0;}
     .footer{margin-left:0; padding:22px 18px 18px;}
-    .welcome-msg .name{display:none;}
+    .welcome-msg{max-width:200px;}
     .overlay{
       position:fixed; inset:0; background:rgba(21,32,51,0.35);
       z-index:1020; opacity:0; visibility:hidden; transition: all .3s var(--ease);
@@ -1763,7 +1759,7 @@
     .filters{grid-template-columns: 1fr 1fr;}
     .page-title{font-size:21.5px;}
     .topnav{padding:0 14px;}
-    .lang-btn span.lang-text{display:none;}
+    .welcome-msg{max-width:170px;}
     .filter-panel{max-height: min(280px, calc(100vh - 160px));}
     .filter-options{max-height:200px;}
     .footer{padding:32px 18px 26px;}
@@ -2021,7 +2017,7 @@
     .ref-stat-label{font-size:10px;}
   }
   @media (max-width: 420px){
-    .filters{grid-template-columns: 1fr;}
+    .filters{grid-template-columns: 1fr 1fr;}
     .sub-modal{padding:22px 18px 24px;}
     .subscribe-banner{padding:28px 22px;}
   }
@@ -2348,7 +2344,7 @@
 <header class="topnav">
   <div class="topnav-left">
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-    <div class="welcome-msg"> <span class="name" id="welcomeName"></span></div>
+    <div class="welcome-msg"><span id="welcomeText"></span><span class="wave" aria-hidden="true">👋</span></div>
   </div>
 
   <div class="topnav-right">
@@ -2381,7 +2377,7 @@
     </div>
 
     <div class="lang-switcher" id="langSwitcher">
-      <button class="lang-btn" id="langBtn">
+      <button class="lang-btn" id="langBtn" aria-label="Change language" title="Change language">
         <span class="flag">🇬🇧</span>
         <span class="lang-text">English</span>
         <span class="chev">▾</span>
@@ -4064,7 +4060,7 @@ document.addEventListener('click', e => {
 
 const translations = {
   en: {
-    welcome: "",
+    welcome: "Welcome back",
     pastQuestions: "Past Questions",
     payments: "Payments",
     referrals: "Referrals",
@@ -4077,7 +4073,7 @@ const translations = {
     paymentsSubtitle: "Subscribe to unlock past questions and past papers for your program."
   },
   fr: {
-    welcome: "",
+    welcome: "Bon retour",
     pastQuestions: "Épreuves Passées",
     payments: "Paiements",
     referrals: "Parrainages",
@@ -4116,7 +4112,7 @@ document.querySelectorAll('.lang-option').forEach(opt => {
 
 function applyTranslation(lang){
   const t = translations[lang];
-  document.querySelector('.welcome-msg').childNodes[0].textContent = t.welcome + ' ';
+  document.getElementById('welcomeText').textContent = t.welcome;
   document.querySelector('.nav-item[data-page="past-questions"] .nav-label').textContent = t.pastQuestions;
   document.querySelector('.nav-item[data-page="payments"] .nav-label').textContent = t.payments;
   document.querySelector('.nav-item[data-page="referrals"] .nav-label').textContent = t.referrals;
@@ -4981,7 +4977,6 @@ async function renderProfile(){
   document.getElementById('infoEmail').textContent = profile.email;
   document.getElementById('infoPhone').textContent = profile.phone;
   document.getElementById('infoJoined').textContent = profile.joined;
-  document.getElementById('welcomeName').textContent = profile.firstName;
   document.getElementById('topAvatar').textContent = profile.initials;
   // Always re-fetch purchase history when profile loads
   // Live: this hits the DB fresh each time, not the in-memory array
