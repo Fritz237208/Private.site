@@ -3785,7 +3785,7 @@ const db = {
       .eq('id', user.id)
       .single();
     if (error) throw error;
-    return 'https://papervault.cm/authentication.html?ref=' + encodeURIComponent(data.referral_code);
+    return 'https://papervault.site/authentication.html?ref=' + encodeURIComponent(data.referral_code);
   },
 
   async getReferralStats(){
