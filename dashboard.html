@@ -1848,10 +1848,19 @@
     .subscribe-banner-text h2{font-size:16.5px;}
     .txn-card{padding:24px 18px;}
     .txn-heading{font-size:16px;}
-    .txn-item{flex-wrap:wrap;}
-    .txn-right{margin-left:58px; padding-left:0; align-items:flex-start;}
+    .txn-item{position:relative; padding-right:96px;}
+    .txn-right{
+      position:absolute;
+      top:16px; right:16px;
+      margin-left:0; padding-left:0;
+      align-items:flex-end;
+      gap:8px;
+    }
+    .txn-amount{font-size:14px;}
+    .status-pill{padding:3px 10px; font-size:9.5px;}
     .semester-pill{font-size:11px; padding:12px 0;}
   }
+
 
   /* ====== ACCESS DENIED MODAL ====== */
   .access-modal-overlay{
@@ -2734,7 +2743,7 @@
           <h2 class="txn-heading">Transaction History <span class="txn-count-badge"><span id="txnCount">00</span></span></h2>
           <div class="txn-toolbar">
             <div class="txn-tabs">
-              <button type="button" class="txn-tab active" data-tab="all">All Transactions</button>
+              <button type="button" class="txn-tab active" data-tab="all">All</button>
               <button type="button" class="txn-tab" data-tab="subscription">Subscriptions</button>
               <button type="button" class="txn-tab" data-tab="withdrawal">Withdrawals</button>
             </div>
@@ -3449,8 +3458,14 @@ var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
    ============================================================ */
 const AUTH_URL = 'authentication.html';
 (async function requireAuth(){
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
+  try {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (error || !session) {
+      window.location.href = AUTH_URL;
+    }
+  } catch (err) {
+    // If the session check itself fails (network issue, etc.), don't
+    // silently let the user through — fail closed.
     window.location.href = AUTH_URL;
   }
 })();
