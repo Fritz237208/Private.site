@@ -168,6 +168,26 @@
       padding: 14px 26px; border-radius: 100px; transition: all .25s;
     }
     .btn-ghost:hover { background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.2); }
+    .btn-blue {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-deep); color: #fff; border: none;
+      font-size: 15px; font-weight: 700; padding: 14px 30px; border-radius: 100px;
+      box-shadow: 0 6px 24px rgba(28,63,191,0.32); transition: all .25s; cursor: pointer;
+    }
+    .btn-blue:hover, .btn-blue:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(28,63,191,0.42); background: #1836a8; }
+    .btn-blue:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+    /* ── ABOUT / MAKERS SECTION ── */
+    .about-section { padding: 4px 0; }
+    .about-card {
+      max-width: 780px; margin: 0 auto; background: #fff; border: 1px solid rgba(28,63,191,0.1);
+      border-radius: 24px; padding: 48px 52px; text-align: center;
+      box-shadow: 0 10px 30px rgba(13,26,58,0.05);
+    }
+    .about-card p { font-size: 15.5px; color: var(--slate-400); line-height: 1.75; margin-bottom: 18px; }
+    .about-card .about-brand { color: var(--text-hi); font-weight: 700; }
+    .about-divider { width: 40px; height: 2px; background: var(--gold); margin: 28px auto; border-radius: 2px; }
+    .about-pitch { font-size: 15.5px; color: var(--slate-500); line-height: 1.7; margin-bottom: 26px; }
 
     .hero-trust {
       display: flex; align-items: center; gap: 10px; margin-top: 32px;
@@ -373,7 +393,7 @@
     .region-meta strong { color: var(--gold); font-weight: 700; }
 
     /* ── TESTIMONIALS ── */
-    .testi-section { padding: 68px 0; border-top: 1px solid rgba(28,63,191,0.1); }
+    .testi-section { padding: 68px 0 32px; border-top: 1px solid rgba(28,63,191,0.1); }
     .testi-carousel { position: relative; margin-top: 60px; display: flex; align-items: center; gap: 20px; }
     .testi-track-wrap { flex: 1; overflow: hidden; border-radius: 28px; cursor: grab; touch-action: pan-y; }
     .testi-track { display: flex; transition: transform .45s cubic-bezier(.65,0,.35,1); }
@@ -394,7 +414,7 @@
     .author-avatar { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:#fff; flex-shrink:0; }
 
     /* ── CTA ── */
-    .cta-section { padding: 76px 0; }
+    .cta-section { padding: 32px 0 76px; }
     .cta-inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
     .cta-box { background: linear-gradient(135deg,rgba(28,63,191,0.07),rgba(41,82,227,0.04)); border: 1px solid rgba(28,63,191,0.18); border-radius: 28px; padding: 56px 56px; text-align: center; position: relative; overflow: hidden; }
     .cta-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(201,150,26,0.06),transparent); pointer-events:none; }
@@ -670,24 +690,41 @@
 })();
 </script>
 
+<!-- ── ABOUT THE MAKERS ── -->
+<section class="about-section layer">
+  <div class="about-card reveal">
+    <div class="section-label" style="justify-content:center;">The Team Behind PaperVault</div>
+    <p><span class="about-brand">PaperVault</span> is built and maintained by <span class="about-brand">PrecisionDev</span>, a small team of young developers who believe finding the right past paper shouldn't be harder than the exam itself. We're students and builders ourselves. We started PrecisionDev to build things we actually needed ourselves, and PaperVault is the first of those.</p>
+    <div class="about-divider"></div>
+    <p class="about-pitch">Looking to get a custom website of your own, tailored to your needs? Our team builds literally any type of website you can think of — from tracking systems to websites that run real API integrations.</p>
+    <a href="https://wa.me/237653183803" target="_blank" rel="noopener">
+      <button class="btn-blue">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Contact Us
+      </button>
+    </a>
+  </div>
+</section>
+
 <!-- ── CTA ── -->
 <section class="cta-section layer">
   <div class="cta-inner">
     <div class="cta-box reveal">
       <div class="section-label" style="justify-content:center;margin-bottom:22px;">Join The Community</div>
       <h2 class="cta-title">Join PaperVault's<br/><span class="gold">Upload Community</span></h2>
-      <p class="cta-sub">Behind every past paper on PaperVault is a student who once needed it too. Be part of the community helping others prepare — every paper you contribute keeps the archive growing for students across Cameroon. Get paid for being part of our upload community</p>
+      <p class="cta-sub">Behind every past paper on PaperVault is a student who once needed it too. Be part of the community helping others prepare — every paper you contribute keeps the archive growing for students across Cameroon.</p>
       <div class="cta-actions">
-     <a href="https://chat.whatsapp.com/GiRHFYjhwGM7WAVeD7XJOX?s=cl&p=a&ilr=4">
+        <a href="authentication.html">
           <button class="btn-primary" style="font-size:16px;padding:16px 36px;">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-            Join Us
+            Browse Questions
           </button>
         </a>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ── FOOTER ── -->
 <footer class="layer">
@@ -699,7 +736,7 @@
 
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2026 PaperVault &nbsp;·&nbsp; <span class="gold">Organized Past Questions for Every Exam.</span></p>
+    <p class="footer-copy">© 2025 PaperVault &nbsp;·&nbsp; <span class="gold">Organized Past Questions for Every Exam.</span></p>
     <p class="footer-copy">Engineered with precision</p>
     <div class="footer-social">
       <!-- X / Twitter — brand color: black -->
